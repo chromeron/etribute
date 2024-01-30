@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PanelBlanco from '../components/PanelBlanco.astro';
+
+
+---
+
+<Layout title="Welcome to Astro.">
+    <h1 class="pt-4 pl-5 text-indigo-900 font-bold text-2xl">Inicio </h1>
+    <main class="min-h-screen w-full text-slate-600 ">
+        <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4 mt-2 p-4 ">
+            <!-- Sección 1 - Gráfica de Usuarios -->
+            <PanelBlanco>
+                <h1 class=" text-indigo-900 font-bold text-2xl">Bienvenida</h1>
+            </PanelBlanco>
+            <PanelBlanco>
+                <h1 class=" text-indigo-900 font-bold text-2xl">Video explicativo u otra info relevante</h1>
+            </PanelBlanco>
+            <PanelBlanco>
+                <h1 class=" text-indigo-900 font-bold text-2xl">Contabilidad </h1>
+            </PanelBlanco>
+            <PanelBlanco>
+                <h1 class="p text-indigo-900 font-bold text-2xl">Planeación Fiscal </h1>
+            </PanelBlanco>
+        </div>
+    </main>
+</Layout>

@@ -1,0 +1,223 @@
+---
+import { User } from 'aws-cdk-lib/aws-iam'
+import RfcForm from '../components/forms/RfcForm'
+
+import { turso } from '../turso'
+
+const { mail } = Astro.params
+
+// const { rows } = await turso.execute({
+//   sql: 'SELECT * FROM posts WHERE slug = ?',
+//   args: [mail]
+// })
+---
+
+ <!-- Contenedor de las 4 secciones -->
+ <h1 class="pt-4 pl-5 text-indigo-900 font-bold text-2xl">Registro de contribuyente nuevo </h1>  
+ <!-- <h1>{rows[0].user_phone}</h1> -->
+ <h1>{mail}</h1>
+    <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4 mt-2 p-4 ">
+        <!-- Sección 1 - Gráfica de Usuarios -->
+        <div class="bg-white p-4 rounded-md drop-shadow-lg ">
+            
+            <div class="chart-container p-4" style="position: relative; min-height:200px;">
+                <!-- El canvas para la gráfica -->
+                <RfcForm client:load />
+            </div>
+        </div>
+
+        <!-- Sección 2 - Gráfica de Comercios -->
+            
+                <!-- El canvas para la gráfica -->
+                <div class="relative flex  h-[430px] w-full flex-col rounded-[10px] border-[1px] border-gray-200 bg-white bg-clip-border shadow-sm ">
+                    <div class="flex h-fit w-full items-center justify-between rounded-t-2xl px-4 py-[15px] shadow-2xl shadow-[#e8e5e5]"
+                    >
+                    <h4 class="text-lg font-bold text-gray-500">
+                        Últimos RFC registrados
+                    </h4>
+                    <button
+                        class="linear rounded-[20px] bg-lightPrimary px-4 py-2 text-base font-medium text-gray-400 transition duration-200 hover:bg-gray-100 active:bg-gray-200 "
+                    >
+                        Ver todos
+                    </button>
+                    </div>
+                    <div class="w-full overflow-x-scroll px-4 md:overflow-x-hidden">
+                    <table role="table" class="w-full min-w-[500px] overflow-x-scroll">
+                        <thead>
+                        <tr role="row">
+                            <th
+                            colspan="1"
+                            role="columnheader"
+                            title="Toggle SortBy"
+                            style="cursor: pointer"
+                            >
+                            <div
+                                class="flex items-center justify-between pb-2 pt-4 text-start uppercase tracking-wide text-gray-600 sm:text-xs lg:text-xs"
+                            >
+                                Contribuyente
+                            </div>
+                            </th>
+                            <th
+                            colspan="1"
+                            role="columnheader"
+                            title="Toggle SortBy"
+                            style="cursor: pointer"
+                            >
+                            <div
+                                class="flex items-center justify-between pb-2 pt-4 text-start uppercase tracking-wide text-gray-600 sm:text-xs lg:text-xs"
+                            >
+                                RFC
+                            </div>
+                            </th>
+                            <th
+                            colspan="1"
+                            role="columnheader"
+                            title="Toggle SortBy"
+                            style="cursor: pointer"
+                            >
+                            <div
+                                class="flex items-center justify-between pb-2 pt-4 text-start uppercase tracking-wide text-gray-600 sm:text-xs lg:text-xs"
+                            >
+                                Editar
+                            </div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody role="rowgroup" class="px-4">
+                        <tr role="row">
+                            <td class="py-3 text-sm" role="cell">
+                            <div class="flex items-center gap-2">
+                                <div class="h-[30px] w-[30px] rounded-full">
+                                <img
+                                    src="https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2244&amp;q=80"
+                                    class="h-full w-full rounded-full"
+                                    alt=""
+                                />
+                                </div>
+                                <p
+                                class="text-sm font-medium text-navy-700"
+                                >
+                                Plasticos pruebas SA. de C.V
+                                </p>
+                            </div>
+                            </td>
+                            <td class="py-3 text-sm" role="cell">
+                            <p class="text-md font-medium text-gray-600 ">
+                                PLAS29344RRCD
+                            </p>
+                            </td>
+                            <td class="py-3 text-sm" role="cell">
+                            <div class="mx-2 flex font-bold space-x-3">
+                                
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil-plus" width="14" height="14" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+                                    <path d="M13.5 6.5l4 4" />
+                                    <path d="M16 19h6" />
+                                    <path d="M19 16v6" />
+                                  </svg>
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="14" height="14" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M4 7l16 0" />
+                                    <path d="M10 11l0 6" />
+                                    <path d="M14 11l0 6" />
+                                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                  </svg>
+                            </div>
+                            </td>
+                        </tr>
+                        <tr role="row">
+                            <td class="py-3 text-sm" role="cell">
+                            <div class="flex items-center gap-2">
+                                <div class="h-[30px] w-[30px] rounded-full">
+                                <img
+                                    src="https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2244&amp;q=80"
+                                    class="h-full w-full rounded-full"
+                                    alt=""
+                                />
+                                </div>
+                                <p
+                                class="text-sm font-medium text-navy-700"
+                                >
+                                Papelería pruebas SA. de C.V
+                                </p>
+                            </div>
+                            </td>
+                            <td class="py-3 text-sm" role="cell">
+                            <p class="text-md font-medium text-gray-600 ">
+                                PLAS29344RRCD
+                            </p>
+                            </td>
+                            <td class="py-3 text-sm" role="cell">
+                            <div class="mx-2 flex font-bold space-x-3">
+                                
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil-plus" width="14" height="14" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+                                    <path d="M13.5 6.5l4 4" />
+                                    <path d="M16 19h6" />
+                                    <path d="M19 16v6" />
+                                  </svg>
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="14" height="14" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M4 7l16 0" />
+                                    <path d="M10 11l0 6" />
+                                    <path d="M14 11l0 6" />
+                                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                  </svg>
+                            </div>
+                            </td>
+                        </tr>
+                        <tr role="row">
+                            <td class="py-3 text-sm" role="cell">
+                            <div class="flex items-center gap-2">
+                                <div class="h-[30px] w-[30px] rounded-full">
+                                <img
+                                    src="https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2244&amp;q=80"
+                                    class="h-full w-full rounded-full"
+                                    alt=""
+                                />
+                                </div>
+                                <p
+                                class="text-sm font-medium text-navy-700"
+                                >
+                                Domos pruebas SA. de C.V
+                                </p>
+                            </div>
+                            </td>
+                            <td class="py-3 text-sm" role="cell">
+                            <p class="text-md font-medium text-gray-600 ">
+                                PLAS29344RRCD
+                            </p>
+                            </td>
+                            <td class="py-3 text-sm" role="cell">
+                            <div class="mx-2 flex font-bold space-x-3">
+                                
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil-plus" width="14" height="14" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+                                    <path d="M13.5 6.5l4 4" />
+                                    <path d="M16 19h6" />
+                                    <path d="M19 16v6" />
+                                  </svg>
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="14" height="14" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M4 7l16 0" />
+                                    <path d="M10 11l0 6" />
+                                    <path d="M14 11l0 6" />
+                                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                  </svg>
+                            </div>
+                            </td>
+                        </tr>
+                        
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+
+    </div>
+    

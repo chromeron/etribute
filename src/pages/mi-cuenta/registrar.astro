@@ -1,0 +1,30 @@
+---
+import PanelBlanco from '../../components/PanelBlanco.astro';
+import Layout from '../../layouts/Layout.astro';
+import RfcForm from '../../components/forms/RfcForm'
+import TablaRfc from '../../components/TablaRfc'
+import PanelTabla from '../../components/PanelTabla.astro';
+
+const cookie = Astro.cookies.get("Authorization")
+---
+
+<Layout title="Welcome to Astro.">
+    <main class="min-h-screen w-full text-slate-600 ">
+        <div class="sm:grid-cols-1 gap-4 mt-2 p-4 ">
+            <h1 class="pt-4 pl-5 text-indigo-900 font-bold text-2xl">Registro de contribuyente nuevo </h1>  
+            <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4 mt-2 p-4 ">
+                <PanelBlanco>                
+                    <RfcForm client:only />
+                </PanelBlanco>
+                <PanelTabla>
+                    <TablaRfc client:only/>
+                </PanelTabla>
+                
+            </div>
+        </div>
+        <h1 class="fixed bottom-5 right-5">{cookie?.value} </h1>
+    </main>
+	
+</Layout>
+
+../../components/Start../../components/contribuyenteRecord

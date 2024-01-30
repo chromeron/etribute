@@ -1,0 +1,12 @@
+---
+import LoginLayout from '../layouts/LoginLayout.astro';
+import Login from '../components/forms/Login'
+import Boton from '../components//Boton.astro'
+---
+
+<LoginLayout title="Welcome to Astro.">
+	<Login client:load/>
+	<div class="py-5">
+		<Boton link="registro" texto="¿Aún no tienes cuenta? Regístrate"/>
+  	</div>
+</LoginLayout>

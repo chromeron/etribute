@@ -1,0 +1,1 @@
+export const END_POINT_BACKEND = "http://3.144.29.33:8080";
