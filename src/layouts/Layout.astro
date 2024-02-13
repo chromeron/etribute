@@ -22,10 +22,13 @@ const { title } = Astro.props;
 	</head>
 	<body>
 		<MainHeader />
-		<Panel />
-		<!-- Contenedor gris al lado de la barra lateral -->
-		<div id="mainContainer" class="pl-20 sm:pl-24 md:pl-64 pt-14 absolute w-full transition-all duration-200 ease-in-out bg-sky-50">
-			<slot/>
+		<div class="flex flex-col">
+
+			<Panel />
+			<!-- Contenedor gris al lado de la barra lateral -->
+			<div id="mainContainer" class="pl-20 sm:pl-24 md:pl-64 pt-14 absolute w-full transition-all duration-200 ease-in-out bg-sky-50">
+				<slot/>
+			</div>
 		</div>
 	</body>
 </html>

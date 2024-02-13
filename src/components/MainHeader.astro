@@ -29,9 +29,10 @@
     </div>
 </header>
 
-<script>
-  const panelButton = document.getElementById('collapse');
-  panelButton.addEventListener('mousedown', () => {
+<script is:inline>
+  document.addEventListener('astro:page-load', () => {
+    const panelButton = document.getElementById('collapse');
+    panelButton.addEventListener('mousedown', () => {
     const sidebar = document.getElementById('sidebar');
     const mainContent = document.getElementById('mainContainer');
     const labels = sidebar?.querySelectorAll('span');
@@ -64,4 +65,5 @@
   iconSideBar?.addEventListener('click',() => (
     toggleMenuIcons?.forEach(toggleMenuIcon => toggleMenuIcon.classList.toggle('hidden') )
   ))
+});
 </script>

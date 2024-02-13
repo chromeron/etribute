@@ -1,14 +1,48 @@
-import { type FormEvent, useState, Fragment, useRef } from "react";
+import { type FormEvent, useState, Fragment, useRef, useEffect } from "react";
 import  { END_POINT_BACKEND } from "../../constants";
 import { useContribuyenteStore } from "../stores/contribuyentesStore";
+import Select from "react-select"
 
-let authToken = document.cookie.replace(/(?:(?:^|.*;\s*)Authorization\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+let user = document.cookie.replace(/(?:(?:^|.*;\s*)User\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+//typescript interface for regimens 
+interface regimens{
+    value: string;
+    label: string;    
+}
 
 export default function Form() {
     const [responseErrorMessage, setResponseErrorMessage] = useState("");
     const [responseSuccessMessage, setResponseSuccessMessage] = useState("");
+    const [regimenes, setRegimenes] = useState<{ [key: string]: string }[]>([]);
     const addContribuyente =  useContribuyenteStore((state) => state.addContribuyente);
 
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(END_POINT_BACKEND+'/regimens'); // Replace with your URL
+          if (!response.ok) {
+            throw new Error('Error al obtener los datos');
+          }
+
+          const jsonData = await response.json();
+          const json = jsonData as { regimen_id: string; descripcion: string }[];
+
+          const arrayList = json.map(item => {
+            return {
+              value: item.regimen_id,
+              label: item.descripcion
+            };
+          });
+          console.log(arrayList);
+          setRegimenes(arrayList);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+  
+      fetchData(); // Call the fetch function
+    },[]) // Empty dependency array: fetch only on initial render
     
     async function submit(e: FormEvent<HTMLFormElement>) {
       e.preventDefault();
@@ -19,7 +53,7 @@ export default function Form() {
       const headers = new Headers()
       headers.set('Content-Type','application/json')
       
-      const response = await fetch(END_POINT_BACKEND+"/eTribute/createAccount/", {
+      const response = await fetch(END_POINT_BACKEND+"/accounts", {
         method: "POST",
         headers: headers,
         body: JSON.stringify(Object.fromEntries(formData))
@@ -39,17 +73,12 @@ export default function Form() {
               setResponseErrorMessage("");
       
           }, 4000);
-        
-        
-          // Move to a new location or you can do something else
-         // window.location.href = "/inicio";
-  
+
       }else{
         setResponseSuccessMessage("");
         setResponseErrorMessage("Erro al registra contribuyente, intente de nuevo" );
       }
 
-      //ref.current.reset();
       
     }
 
@@ -62,12 +91,12 @@ return(
     <form onSubmit={submit} className="w-full gap-10">
       <input type="text" name="account_name" className="placeholder:italic placeholder:text-slate-400 border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" placeholder="Nombre del contribuyente"/>
       <input type="text" name="rfc" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" placeholder="RFC"/>
-      <input type="text" name="regimen" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" placeholder="Régimen fiscal"/>
-      <input type="hidden" name="cer" value="urlDeArchivoCER" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" placeholder="Régimen fiscal"/>
-      <input type="hidden" name="key_value" value="urlDeArchivoKEY" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" placeholder="Régimen fiscal"/>
-      <input type="hidden" name="e_firma" value="password_e_firma" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" placeholder="Régimen fiscal"/>
-      <input type="hidden" name="token" value={authToken} className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" placeholder="Régimen fiscal"/>
-      <h2 className="text-gray-600 text-lg font-semibold pb-4">Ingresa los archivos de to e-Firma</h2>
+      <Select name="regimen" options={regimenes} isClearable={true} placeholder={'Selecciona Régimen fiscal'} />
+      <input type="hidden" name="cer" value="urlDeArchivoCER" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"/>
+      <input type="hidden" name="key_value" value="urlDeArchivoKEY" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
+      <input type="hidden" name="e_firma" value="password_e_firma" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
+      <input type="hidden" name="user_id" value={user} className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"/>
+      <h2 className="text-gray-600 text-lg font-semibold pb-4 pt-8">Ingresa los archivos de tu e-Firma</h2>
       <div className="flex flex-row space-x-8">
         
         <div className="w-1/2 py-3">

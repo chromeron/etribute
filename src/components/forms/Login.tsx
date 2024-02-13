@@ -1,6 +1,7 @@
 import { type FormEvent, useState, Fragment } from "react";
 import  { END_POINT_BACKEND } from "../../constants";
 import type { APIRoute } from "astro";
+import { setCookie } from 'typescript-cookie'
 
 
 export default function Form() {
@@ -15,20 +16,16 @@ export default function Form() {
       const json = btoa(user_name+":"+password);
       console.log(json);
 
-      const headers = new Headers()
-      headers.set('Content-Type','application/json')
-      headers.set('Access-Control-Allow-Origin','*')
       
-      const response = await fetch(END_POINT_BACKEND+"/eTribute/login/"+json, {
-        method: "GET",
-        headers: headers,
-      });
+      const response = await fetch(END_POINT_BACKEND+"/login/"+json);
 
       if (response.ok){
         setResponseMessage("");
         const data = await response.json();
 
-        document.cookie = "Authorization="+data.token;
+        setCookie("Authorization", data.token);
+        setCookie("User", data.user_id);
+        setCookie("Type", data.user_type);
         console.log(document.cookie);
         window.location.href = "/dashboard"
       }else{
@@ -45,7 +42,7 @@ return(
   <Fragment>
     {responseMessage && <p className="w-full bg-red-500 text-white p-1 rounded mb-2">{responseMessage}</p>}
     <form onSubmit={submit}>
-      <label className="font-semibold text-sm text-gray-600 pb-1 block">Usuario</label>
+      <label className="font-semibold text-sm text-gray-600 pb-1 block">Correo</label>
       <input type="text" name="email" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
       <label className="font-semibold text-sm text-gray-600 pb-1 block">Contraseña</label>
       <input type="password" name="password" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />

@@ -52,7 +52,7 @@ return(
       <label className="font-semibold text-sm text-gray-600 pb-1 block">Ciudad</label>
       <input type="text" name="user_city" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
       <label className="font-semibold text-sm text-gray-600 pb-1 block">Teléfono</label>
-      <input type="number" name="user_phone" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
+      <input type="text" name="user_phone" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
       <label className="font-semibold text-sm text-gray-600 pb-1 block">Correo</label>
       <input type="text" name="user_mail" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
       <label className="font-semibold text-sm text-gray-600 pb-1 block">Password</label>

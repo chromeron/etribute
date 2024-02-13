@@ -1,0 +1,59 @@
+---
+import PanelBlanco from '../components/PanelBlanco.astro';
+import Layout from '../layouts/Layout.astro';
+import ImageUploader from '../components/forms/FileUpload'
+
+const cookie = Astro.cookies.get("Authorization")
+---
+
+<Layout title="Welcome to Astro.">
+	
+	<main class="min-h-screen w-full bg-sky-50  text-slate-600 ">
+		<h1 class="pt-4 pl-5 text-indigo-900 font-bold text-2xl">Dashboard </h1>
+		<div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4 mt-2 p-4 ">
+			
+			<PanelBlanco>
+                <ImageUploader fileExtension="png" onUploadSuccess={true} client:only/>
+            </PanelBlanco>
+		</div>
+		<h1 class="fixed bottom-5 right-5">{cookie?.value} </h1>
+	</main>
+</Layout>
+
+<!-- import React, { useState } from 'react';
+import FileUploader from './FileUploader'; // Ajusta la ruta según tu estructura de archivos
+
+const FormularioConImagen: React.FC = () => {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  // Función para manejar la URL de la imagen subida
+  const handleUploadSuccess = (url: string) => {
+    setImageUrl(url);
+  };
+
+  // Función para manejar el envío del formulario
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    // Aquí puedes hacer lo que necesites con la URL de la imagen, por ejemplo, enviarla al servidor junto con otros datos del formulario
+    console.log('URL de la imagen:', imageUrl);
+
+    // Lógica adicional de envío del formulario
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {/* ... Otros campos del formulario ... */}
+
+      {/* Componente FileUploader con la función handleUploadSuccess como prop */}
+      <FileUploader fileExtension="cer" onUploadSuccess={handleUploadSuccess} />
+
+      {/* ... Otros campos del formulario ... */}
+
+      {/* Botón para enviar el formulario */}
+      <button type="submit">Enviar</button>
+    </form>
+  );
+};
+
+export default FormularioConImagen; -->

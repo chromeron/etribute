@@ -1,0 +1,20 @@
+---
+import PanelBlanco from '../../components/PanelBlanco.astro';
+import Layout from '../../layouts/Layout.astro';
+import FileUpload from "../../components/forms/FileUpload"
+
+const cookie = Astro.cookies.get("Authorization")
+//const user_type = Astro.cookies.get("Type")
+import ViewDocs from "../../components/ViewDocs";
+---
+
+<Layout title="SAT DOCS contribuyente">
+	
+	<main class="min-h-screen w-full bg-sky-50  text-slate-600 ">
+		<h1 class="pt-4 pl-5 text-indigo-900 font-bold text-2xl">SAT DOCS </h1>
+		<div class="grid grid-cols-1 gap-4 mt-2 p-4">
+			<ViewDocs client:only/>
+		</div>
+		<!-- <h1 class="fixed bottom-5 right-5">{user_type?.value} </h1> -->
+	</main>
+</Layout>

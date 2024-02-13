@@ -10,7 +10,7 @@ interface Contribuyente{
   cer: string
   key_value: string
   e_firma: string
-  token: string
+  user_id: string
 }
 
 interface ContribuyenteState{
@@ -23,7 +23,7 @@ export const useContribuyenteStore = create<ContribuyenteState> ((set) => ({
     contribuyentes:[],
     fetchContribuyentes: async () => {
         try {
-          const response = await fetch(END_POINT_BACKEND+'/eTribute/getAccountByToken/'+getCookie('Authorization'));
+          const response = await fetch(END_POINT_BACKEND+'/accounts');
           const data = await response.json();
           set({ contribuyentes: data });
         } catch (error) {
