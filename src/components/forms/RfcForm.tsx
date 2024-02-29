@@ -1,18 +1,22 @@
-import { type FormEvent, useState, Fragment, useRef, useEffect } from "react";
+import { type FormEvent, useState, Fragment, useEffect } from "react";
 import  { END_POINT_BACKEND } from "../../constants";
 import { useContribuyenteStore } from "../stores/contribuyentesStore";
 import Select from "react-select"
+import { getCookie } from "typescript-cookie";
+import FileUpload from "./FileUpload";
 
-let user = document.cookie.replace(/(?:(?:^|.*;\s*)User\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+let user = getCookie('User');
 
 //typescript interface for regimens 
-interface regimens{
-    value: string;
-    label: string;    
-}
+// interface regimens{
+//     value: string;
+//     label: string;    
+// }
 
 export default function Form() {
-    const [responseErrorMessage, setResponseErrorMessage] = useState("");
+
+
+  const [responseErrorMessage, setResponseErrorMessage] = useState("");
     const [responseSuccessMessage, setResponseSuccessMessage] = useState("");
     const [regimenes, setRegimenes] = useState<{ [key: string]: string }[]>([]);
     const addContribuyente =  useContribuyenteStore((state) => state.addContribuyente);
@@ -20,7 +24,7 @@ export default function Form() {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch(END_POINT_BACKEND+'/regimens'); // Replace with your URL
+          const response = await fetch(END_POINT_BACKEND+'/regimens'); 
           if (!response.ok) {
             throw new Error('Error al obtener los datos');
           }
@@ -82,6 +86,8 @@ export default function Form() {
       
     }
 
+    const ruta = `contribuyente/files/${user}`
+
     
 
 return(
@@ -99,40 +105,11 @@ return(
       <h2 className="text-gray-600 text-lg font-semibold pb-4 pt-8">Ingresa los archivos de tu e-Firma</h2>
       <div className="flex flex-row space-x-8">
         
-        <div className="w-1/2 py-3">
-          <div className="relative h-48 rounded-lg border-dashed border-2 border-blue-200 bg-gray-100 flex justify-center items-center">
-            <div className="absolute">
-              <div className="flex flex-col items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-file-upload" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-                  <path d="M12 11v6" />
-                  <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
-                </svg>
-                <span className="block text-gray-400 font-normal text-center">Seleccionar <br/>archivo .Cer</span>
-              </div>
-            </div>
-            <input type="file" className="h-full w-full opacity-0" name="" />
-          </div>
+        <div className="w-1/2 py-3 place-items-center">
+          <FileUpload fileExtension={"cer"} ruta={ruta} onUploadSuccess={true} />
         </div>
-        
         <div className="w-1/2 py-3">
-          <div className="relative h-48 rounded-lg border-dashed border-2 border-blue-200 bg-gray-100 flex justify-center items-center">
-            <div className="absolute">
-              <div className="flex flex-col items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-file-upload" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-                  <path d="M12 11v6" />
-                  <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
-                </svg>
-                <span className="block text-gray-400 font-normal">Archivo .Key</span>
-              </div>
-            </div>
-            <input type="file" className="h-full w-full opacity-0" name="" />
-          </div>
+          <FileUpload fileExtension={"key"} ruta={ruta} onUploadSuccess={true} />
         </div>
       </div>
       <div className="text-right">

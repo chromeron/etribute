@@ -1,55 +1,12 @@
 ---
 import Point from "../images/svg/point.astro";
+import MenuContribuyente from "./SelectContribuyente";
 ---
-<div id="sidebar" class="w-60  h-screen mt-[3.25rem] z-10 rounded-none border-none transition-all duration-200 ease-in-out overflow-hidden max-md:bg-white max-sm:w-full">
+<div id="sidebar" class="w-60  h-screen mt-[3.25rem] z-10 rounded-none border-none transition-all duration-200 ease-in-out overflow-hidden max-md:bg-white max-sm:w-full" transition:animate="fade">
     <!-- Items -->
     <div class="pt-2 px-3 text-indigo-900 flex flex-col">
         <div class="grow">
-            <div class="whitespace-nowrap p-3 items-center justify-center h-14 border-b">
-                <h1 class="text-slate-700 text-sm font-bold">
-                    Select 
-                </h1>
-            </div>
-            <div class="whitespace-nowrap">
-                <a href="/contribuyente/contabilidad" class="relative p-3 my-3 flex items-center space-x-3 justify-start rounded-lg group hover:bg-slate-200 min-w-48">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-smart-home stroke-gray-400" width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M19 8.71l-5.333 -4.148a2.666 2.666 0 0 0 -3.274 0l-5.334 4.148a2.665 2.665 0 0 0 -1.029 2.105v7.2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-7.2c0 -.823 -.38 -1.6 -1.03 -2.105" />
-                        <path d="M16 15c-2.21 1.333 -5.792 1.333 -8 0" />
-                    </svg>
-                    <span class="text-slate-700 text-sm font-bold">Contabilidad</span>
-                </a>
-            </div>
-            <div class="whitespace-nowrap">
-                <a href="#" class="relative p-3 my-3 flex items-center space-x-3 justify-start rounded-lg group hover:bg-slate-200 min-w-48">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-smart-home stroke-gray-400" width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M19 8.71l-5.333 -4.148a2.666 2.666 0 0 0 -3.274 0l-5.334 4.148a2.665 2.665 0 0 0 -1.029 2.105v7.2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-7.2c0 -.823 -.38 -1.6 -1.03 -2.105" />
-                        <path d="M16 15c-2.21 1.333 -5.792 1.333 -8 0" />
-                    </svg>
-                    <span class="text-slate-700 text-sm font-bold">Planeación fiscal</span>
-                </a>
-            </div>
-            <div class="whitespace-nowrap">
-                <a href="/contribuyente/docs" class="relative p-3 my-3 flex items-center space-x-3 justify-start rounded-lg group hover:bg-slate-200 min-w-48">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-smart-home stroke-gray-400" width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M19 8.71l-5.333 -4.148a2.666 2.666 0 0 0 -3.274 0l-5.334 4.148a2.665 2.665 0 0 0 -1.029 2.105v7.2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-7.2c0 -.823 -.38 -1.6 -1.03 -2.105" />
-                        <path d="M16 15c-2.21 1.333 -5.792 1.333 -8 0" />
-                    </svg>
-                    <span class="text-slate-700 text-sm font-bold">SAT T&D</span>
-                </a>
-            </div>
-            <div class="whitespace-nowrap">
-                <a href="#" class="relative p-3 my-3 flex items-center space-x-3 justify-start rounded-lg group hover:bg-slate-200 min-w-48">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-smart-home stroke-gray-400" width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M19 8.71l-5.333 -4.148a2.666 2.666 0 0 0 -3.274 0l-5.334 4.148a2.665 2.665 0 0 0 -1.029 2.105v7.2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-7.2c0 -.823 -.38 -1.6 -1.03 -2.105" />
-                        <path d="M16 15c-2.21 1.333 -5.792 1.333 -8 0" />
-                    </svg>
-                    <span class="text-slate-700 text-sm font-bold">Análisis</span>
-                </a>
-            </div>
+            <MenuContribuyente client:only />
             <hr>
             <div class="whitespace-nowrap">
                 <a href="/home" class="relative p-3 my-3 flex items-center space-x-3 justify-start rounded-lg group hover:bg-slate-200 min-w-48">
@@ -159,7 +116,7 @@ import Point from "../images/svg/point.astro";
 
 
 <script is:inline>
-    document.addEventListener('astro:page-load', () => {
+    //document.addEventListener('astro:page-load', () => {
             // Obtener todas las opciones principales con desplegables
         const opcionesConDesplegable = document.querySelectorAll(".opcion-con-desplegable");
 
@@ -174,5 +131,5 @@ import Point from "../images/svg/point.astro";
             desplegable.classList.toggle("hidden");
             });
         });
-    });
+   // });
 </script>

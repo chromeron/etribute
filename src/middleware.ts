@@ -1,6 +1,6 @@
 import { defineMiddleware } from "astro/middleware";
 
-const ALLOWED_PATHS = ["/","/api/auth/signin","/inicio","/registro"];
+const ALLOWED_PATHS = ["/api/auth/signin","/","/registro"];
 
 export const onRequest = defineMiddleware(({ url, cookies, redirect}, next)=> {
     // If present, this will have the form: "Basic <credential>"
@@ -21,7 +21,7 @@ export const onRequest = defineMiddleware(({ url, cookies, redirect}, next)=> {
     }else{
         //Construct a full URL by passing `context.url` as the base URL
         // return Response.redirect(new URL("/", context.url), 302);
-         return redirect("/inicio", 302);
+         return redirect("/", 302);
     }
     
 });

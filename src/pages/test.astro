@@ -13,7 +13,7 @@ const cookie = Astro.cookies.get("Authorization")
 		<div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4 mt-2 p-4 ">
 			
 			<PanelBlanco>
-                <ImageUploader fileExtension="png" onUploadSuccess={true} client:only/>
+                <ImageUploader fileExtension="png" onUploadSuccess={true} ruta="" client:only/>
             </PanelBlanco>
 		</div>
 		<h1 class="fixed bottom-5 right-5">{cookie?.value} </h1>

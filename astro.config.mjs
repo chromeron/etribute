@@ -6,7 +6,14 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
+  prefetch: {
+    prefetchAll: false
+  },
   output: "server",
-  adapter: aws(),
+  adapter: aws({
+    serverRoutes: [
+      "api/*"     // Directory of API endpoints which require all methods
+    ]
+  }),
   integrations: [react(), tailwind()]
 });

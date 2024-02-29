@@ -1,19 +1,20 @@
-import {useCallback, useState} from 'react'
+import {useState} from 'react'
 import {useDropzone} from 'react-dropzone'
+import { END_POINT_BACKEND } from '../../constants';
 
 interface FileUploaderProps {
     fileExtension: string;
     onUploadSuccess: (imageUrl: string) => void;
   }
 
-export default function MyDropzone<FileUploaderProps>({ fileExtension, onUploadSuccess }) {
+export default function MyDropzone<FileUploaderProps>({ fileExtension, ruta, onUploadSuccess }) {
     const [fileUploaded, setFileUploaded] = useState(false);
     const [fileLink, setfileLink] = useState("");
 
     const onDrop = async (acceptedFiles: string | any[]) => {
         if (acceptedFiles.length === 1 && acceptedFiles[0].name.endsWith(`.${fileExtension}`)) {
             // Aquí puedes realizar cualquier acción con el archivo subido, como enviarlo a un servidor
-            console.log('Archivo subido:', acceptedFiles[0]);
+            console.log('Archivo seleccionado:', acceptedFiles[0]);
             const file = acceptedFiles[0];
 
             // const formData = new FormData();
@@ -21,13 +22,16 @@ export default function MyDropzone<FileUploaderProps>({ fileExtension, onUploadS
            
             
               const formData = new FormData();
-              formData.append("key", "test/image/test.pdf");
+              formData.append("key", `${ruta}/${fileExtension}.${fileExtension}`);
               formData.append("content-type", fileExtension);
             try{
-              const response = await fetch("/api/aws/upload", {
-                method: "POST",
-                body: formData,
-              });
+                console.log(formData);
+                console.log("antes de fetch");
+                const response = await fetch("/api/aws/upload", {
+                    method: "POST",
+                    body: formData,
+                  });
+                
               if (response.ok){
                 const result = await response.json();
                 const {fileLink, signedUrl} = result.uploadUrl;
@@ -100,7 +104,21 @@ export default function MyDropzone<FileUploaderProps>({ fileExtension, onUploadS
                     </div>
                 </div>
                 : (
-                <p>Click aquí o arrastra y suelta tu archivo</p>
+                    <div className='flex flex-col justify-center items-center h-screen'>
+                        <div className='mb-4'>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-file-upload" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                                <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+                                <path d="M12 11v6" />
+                                <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
+                            </svg>
+                        </div>
+                        <div className='justify-center text-center'>
+                            <p className="text-gray-400 font-normal">Archivo</p>
+                            <p>.{fileExtension}</p>
+                        </div>
+                  </div>
                 )}
         </div>
     )

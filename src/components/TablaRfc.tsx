@@ -3,15 +3,20 @@ import {useContribuyenteStore} from "./stores/contribuyentesStore";
 import {ContribuyenteRecord} from "./ContribuyenteRecord";
 
 export default function tablaRfcConstribuyentes(){
+
+    //const $usuario =  useStore(usuario);
+    //const usuario = useStore(setUser($usuario))
+    
     
     const contribuyentes = useContribuyenteStore((state) => state.contribuyentes);
     const addContribuyente = useContribuyenteStore((state) => state.addContribuyente);
     const fetchContribuyente = useContribuyenteStore((state) => state.fetchContribuyentes);
-
-    //console.log(contribuyentes)
+   
+    console.log(contribuyentes)
     useEffect(() => {
         fetchContribuyente();
     },[addContribuyente]);
+
     
 
 return(
