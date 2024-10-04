@@ -1,5 +1,5 @@
 {
-  "name": "etribute",
+  "name": "e-tribute",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -32,9 +32,9 @@
     "zustand": "^4.5.0"
   },
   "devDependencies": {
-    "astro-sst": "^2.39.7",
-    "aws-cdk-lib": "2.110.1",
+    "astro-sst": "2.40.4",
+    "aws-cdk-lib": "2.124.0",
     "constructs": "10.3.0",
-    "sst": "^2.39.7"
+    "sst": "2.40.4"
   }
 }

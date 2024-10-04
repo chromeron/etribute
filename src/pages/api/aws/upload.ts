@@ -24,19 +24,19 @@ export const POST: APIRoute = async ({ request }) => {
   
 };
 
-export const GET: APIRoute = async ({ request }) => {
-  try {
+// export const GET: APIRoute = async ({ request }) => {
+//   try {
     
     
-    return new Response(JSON.stringify({
-      test: "test",
-    }),
-    { status: 200 });
-  } catch (err) {
-    return new Response(JSON.stringify({
-      error: err,
-    }),
-    { status: 500 });
-  }
+//     return new Response(JSON.stringify({
+//       test: "test",
+//     }),
+//     { status: 200 });
+//   } catch (err) {
+//     return new Response(JSON.stringify({
+//       error: err,
+//     }),
+//     { status: 500 });
+//   }
   
-};
+// };

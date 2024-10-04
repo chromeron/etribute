@@ -4,6 +4,7 @@ export const GET: APIRoute = async ({ cookies, redirect }) => {
   cookies.delete("Authorization", { path: "/" });
   cookies.delete("Type", { path: "/" });
   cookies.delete("User", { path: "/" });
-  localStorage.clear();
+  //window.localStorage.clear();
+  //localStorage.clear();
   return redirect("/");
 };

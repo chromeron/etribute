@@ -5,7 +5,7 @@ import Select from "react-select"
 import { getCookie } from "typescript-cookie";
 import FileUpload from "./FileUpload";
 
-let user = getCookie('User');
+const user = getCookie('User');
 
 //typescript interface for regimens 
 // interface regimens{
@@ -19,6 +19,8 @@ export default function Form() {
   const [responseErrorMessage, setResponseErrorMessage] = useState("");
     const [responseSuccessMessage, setResponseSuccessMessage] = useState("");
     const [regimenes, setRegimenes] = useState<{ [key: string]: string }[]>([]);
+    const [fileCer, setFileCer] = useState("");
+    const [fileKey, setFileKey] = useState("");
     const addContribuyente =  useContribuyenteStore((state) => state.addContribuyente);
 
     useEffect(() => {
@@ -56,7 +58,10 @@ export default function Form() {
       const json = JSON.stringify(Object.fromEntries(formData));
       const headers = new Headers()
       headers.set('Content-Type','application/json')
-      
+      formData.append( 'cer', fileCer );
+      formData.append( 'key_value', fileKey );
+      formData.append( 'user_id', user );
+
       const response = await fetch(END_POINT_BACKEND+"/accounts", {
         method: "POST",
         headers: headers,
@@ -86,6 +91,16 @@ export default function Form() {
       
     }
 
+    const handleCerUploadSuccess = (data: string) => {
+      // Handle uploaded data in the parent component
+      setFileCer(data);
+    };
+
+    const handleKeyUploadSuccess = (data: string) => {
+      setFileKey(data);
+    };
+
+
     const ruta = `contribuyente/files/${user}`
 
     
@@ -98,18 +113,15 @@ return(
       <input type="text" name="account_name" className="placeholder:italic placeholder:text-slate-400 border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" placeholder="Nombre del contribuyente"/>
       <input type="text" name="rfc" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" placeholder="RFC"/>
       <Select name="regimen" options={regimenes} isClearable={true} placeholder={'Selecciona Régimen fiscal'} />
-      <input type="hidden" name="cer" value="urlDeArchivoCER" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"/>
-      <input type="hidden" name="key_value" value="urlDeArchivoKEY" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
-      <input type="hidden" name="e_firma" value="password_e_firma" className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
-      <input type="hidden" name="user_id" value={user} className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"/>
+      <input type="password" name="e_firma" className="border rounded-lg px-3 py-2 mt-5 mb-5 text-sm w-full" placeholder="Contraseña e-Firma"/>
       <h2 className="text-gray-600 text-lg font-semibold pb-4 pt-8">Ingresa los archivos de tu e-Firma</h2>
       <div className="flex flex-row space-x-8">
         
         <div className="w-1/2 py-3 place-items-center">
-          <FileUpload fileExtension={"cer"} ruta={ruta} onUploadSuccess={true} />
+          <FileUpload fileExtension={"cer"} ruta={ruta} onUploadSuccess={handleCerUploadSuccess} />
         </div>
         <div className="w-1/2 py-3">
-          <FileUpload fileExtension={"key"} ruta={ruta} onUploadSuccess={true} />
+          <FileUpload fileExtension={"key"} ruta={ruta} onUploadSuccess={handleKeyUploadSuccess} />
         </div>
       </div>
       <div className="text-right">

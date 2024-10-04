@@ -1,5 +1,5 @@
 ---
-import MainHeader from '../components/MainHeader.astro';
+import MainHeader from '../components/MainHeader';
 import Panel from '../components/Panel.astro';
 interface Props {
 	title: string;
@@ -14,17 +14,17 @@ const { title } = Astro.props;
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="https://e-tribute-client-files.s3.amazonaws.com/public/home/favicon.jpeg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
 	<body>
-		<MainHeader />
+		<MainHeader client:only/>
 		<div class="flex flex-col">
 
 			<Panel />
 			<!-- Contenedor gris al lado de la barra lateral -->
-			<div id="mainContainer" class="pl-20 sm:pl-24 md:pl-64 pt-14 absolute w-full transition-all duration-200 ease-in-out bg-sky-50">
+			<div id="mainContainer" class="sm:pl-24 md:pl-60 pt-10 absolute w-full bg-[#062237]">
 				<slot/>
 			</div>
 		</div>

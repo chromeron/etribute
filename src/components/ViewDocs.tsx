@@ -39,7 +39,7 @@ export default function tablaRfcConstribuyentes(){
 
 return(
     <Fragment> 
-        <h1 className="pt-4 pl-5 text-indigo-900 font-bold text-2xl">SAT DOCS / { contribuyenteActivoMenu &&  (contribuyenteActivoMenu.account_name )}
+        <h1 className="pt-4 pl-5 text-white font-bold text-2xl ">SAT DOCS / { contribuyenteActivoMenu &&  (contribuyenteActivoMenu.account_name )}
         </h1>
 		<div className="grid grid-cols-1 gap-4 mt-2 p-4">
 		
@@ -55,7 +55,7 @@ return(
                             <div className="flex flex-row text-center">
                                 <div className="p-5 bg-slate-100 basis-full">
                                     Constancia de situación fiscal
-                                    <FileUpload fileExtension={"pdf"} ruta={"test"} onUploadSuccess={true} />
+                                    <FileUpload fileExtension={"pdf"} ruta={"test/otro"} onUploadSuccess={true} />
                                 </div>
                                 <div className="p-5 bg-slate-100 basis-full">
                                     Opinión de cumplimiento

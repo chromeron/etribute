@@ -1,74 +1,19 @@
 ---
 import PanelBlanco from '../../../components/PanelBlanco.astro';
 import Layout from '../../../layouts/Layout.astro';
-import Select from "react-select"
+import Reportes from  '../../../components/contribuyente/Reportes'
 
 const cookie = Astro.cookies.get("Authorization")
 ---
 
 <Layout title="Contabilidad contribuyente">
 	
-	<main class="min-h-screen w-full bg-sky-50  text-slate-600 ">
+	<main class="min-h-screen w-full bg-sky-50  text-slate-600 pl-6 pt-4">
 		<h1 class="pt-4 pl-5 text-indigo-900 font-bold text-2xl">Contabilidad </h1>
 		<div class="grid grid-cols-1 gap-4 mt-2 p-4">
 			
-			<PanelBlanco>
-                <div class="grid w-10/12">
-                    <div class="grid grid-cols-2 gap-10">
-                        <Select isClearable={true} placeholder={'Selecciona año fiscal'} />
-                        <Select isClearable={true} placeholder={'Selecciona mes'} />
-                    </div>
-                    <div class="grid divide-y w-10/12 mx-auto mt-8">
-                        <div class="py-5">
-                            <details class="group ">
-                                <summary class="flex justify-between items-center font-medium cursor-pointer list-none bg-slate-100 p-6">
-                                    <span> Emitidos</span>
-                                    <span class="transition group-open:rotate-180">
-                                        <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path>
-                                        </svg>
-                                    </span>
-                                </summary>
-                                <div class="p-6">
-                                    <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
-                                        Aquí se mostrará el listado de facturas emitidas del año y mes seleccionados
-                                    </p>
-                                    <br>
-                                    <ul>
-                                        <li>Factura de venta (A)</li>
-                                        <li>Factura de venta (B)</li>   
-                                        <li>Factura de venta (C)</li>
-                                    </ul>
-                                    </ul>
-                                </div>
-                            </details>
-                        </div>
-                    </div>
-                    <div class="grid divide-y w-10/12 mx-auto mt-8">
-                        <div class="py-5">
-                            <details class="group ">
-                                <summary class="flex justify-between items-center font-medium cursor-pointer list-none bg-slate-100 p-6">
-                                    <span> Recibidos</span>
-                                    <span class="transition group-open:rotate-180">
-                                        <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path>
-                                        </svg>
-                                    </span>
-                                </summary>
-                                <div class="p-6">
-                                    <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
-                                        Aquí se mostrará el listado de facturas recibidas del año y mes seleccionados
-                                    </p>
-                                    <br>
-                                    <ul>
-                                        <li>Factura de compra (A)</li>
-                                        <li>Factura de compra (B)</li>   
-                                        <li>Factura de compra (C)</li>
-                                    </ul>
-                                    </ul>
-                                </div>
-                            </details>
-                        </div>
-                    </div>
-                </div>
+			<PanelBlanco >
+                <Reportes client:only />
             </PanelBlanco>
 		</div>
 		<h1 class="fixed bottom-5 right-5">{cookie?.value} </h1>

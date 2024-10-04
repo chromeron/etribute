@@ -2,11 +2,7 @@ import { Fragment, useEffect } from "react";
 import {useContribuyenteStore} from "./stores/contribuyentesStore";
 import {ContribuyenteRecord} from "./ContribuyenteRecord";
 
-export default function tablaRfcConstribuyentes(){
-
-    //const $usuario =  useStore(usuario);
-    //const usuario = useStore(setUser($usuario))
-    
+export default function tablaRfcConstribuyentes(){    
     
     const contribuyentes = useContribuyenteStore((state) => state.contribuyentes);
     const addContribuyente = useContribuyenteStore((state) => state.addContribuyente);

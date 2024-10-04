@@ -8,10 +8,10 @@ import PanelTabla from '../../components/PanelTabla.astro';
 const cookie = Astro.cookies.get("Authorization")
 ---
 
-<Layout title="Welcome to Astro.">
-    <main class="min-h-screen w-full text-slate-600 ">
+<Layout title="Registrar contribuyente">
+    <main class="min-h-screen w-full bg-[#0d5898]">
         <div class="sm:grid-cols-1 gap-4 mt-2 p-4 ">
-            <h1 class="pt-4 pl-5 text-indigo-900 font-bold text-2xl">Registrar nuevo contribuyente </h1>  
+            <h1 class="pt-4 pl-5 text-blue-50 font-bold text-2xl">Registrar contribuyente </h1>  
             <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4 mt-2 p-4 ">
                 <PanelBlanco>                
                     <RfcForm client:only />

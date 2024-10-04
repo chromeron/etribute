@@ -1,0 +1,31 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+import { ViewTransitions } from 'astro:transitions';
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="https://e-tribute-client-files.s3.amazonaws.com/public/home/favicon.jpeg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <ViewTransitions />
+  </head>
+  <body>
+    <div class="min-h-screen flex flex-col justify-center bg-[#062237]">
+      <div class="mx-auto w-full">
+        <h1 class="font-bold text-center mb-5 text-white text-2xl">eTribute</h1>
+        <div class="w-full">
+          <slot />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

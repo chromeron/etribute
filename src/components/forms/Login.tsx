@@ -29,8 +29,9 @@ export default function Form() {
         setCookie("Authorization", data.token);
         setCookie("User", data.user_id);
         setCookie("Type", data.user_type);
+        setCookie("UserName", data.user_name);
         console.log(document.cookie);
-        window.location.href = "/dashboard" 
+        window.location.href = "/home" 
       }
       
     }
@@ -63,6 +64,7 @@ return(
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
       </button>
+      
   </form>
   </Fragment>);
 }

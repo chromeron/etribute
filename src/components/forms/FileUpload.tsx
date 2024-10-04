@@ -50,6 +50,7 @@ export default function MyDropzone<FileUploaderProps>({ fileExtension, ruta, onU
                 setfileLink(fileLink);
                 // Deshabilitar el componente después de subir un archivo
                      setFileUploaded(true);
+                     onUploadSuccess(fileLink);
               }
               //const result = await response.json();
               
@@ -104,7 +105,7 @@ export default function MyDropzone<FileUploaderProps>({ fileExtension, ruta, onU
                     </div>
                 </div>
                 : (
-                    <div className='flex flex-col justify-center items-center h-screen'>
+                    <div className='flex flex-col justify-center items-center'>
                         <div className='mb-4'>
                             <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-file-upload" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
